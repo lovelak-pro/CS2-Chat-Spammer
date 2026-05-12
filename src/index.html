@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CS2 Chat Spammer</title>
+    <style>
+      * {
+        padding: 0%;
+        margin: 0%;
+        box-sizing: border-box;
+        user-select: none;
+      }
+      body {
+        text-align: center;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+      h2 {
+        margin: 20px 0 10px 0;
+      }
+      span {
+        color: red;
+      }
+      textarea,
+      select,
+      input,
+      button {
+        border: none;
+        outline: none;
+        width: 250px;
+      }
+      button {
+        border: 2px black solid;
+      }
+      textarea {
+        resize: none;
+        font-size: larger;
+        height: 100px;
+        padding: 5px 5px;
+      }
+      select,
+      input {
+        height: 30px;
+        text-align: center;
+      }
+      input {
+        text-transform: uppercase;
+      }
+      input::placeholder {
+        text-transform: none;
+      }
+      fieldset {
+        width: fit-content;
+        border: 2px black solid;
+        display: inline;
+      }
+      fieldset legend {
+        font-size: 14px;
+        font-weight: 500;
+      }
+      #start {
+        border: 2px black solid;
+        background-color: transparent;
+        margin-top: 5px;
+        height: 30px;
+        width: 253px;
+      }
+      .prompt {
+        font-size: 14px;
+        margin-top: 10px;
+      }
+      .prompt a {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h2><span>CS2</span> Chat Spammer</h2>
+    <fieldset>
+      <legend>Enter Your Message For Spam<span>*</span></legend>
+      <textarea
+        placeholder="Type Here ................"
+        id="message"
+      ></textarea>
+    </fieldset>
+    <br />
+    <fieldset>
+      <legend>Select Where To Spam<span>*</span></legend>
+      <select id="where">
+        <option value="none">Select Team/All Chat</option>
+        <option value="team">Team Chat</option>
+        <option value="all">All Chat</option>
+      </select>
+    </fieldset>
+    <br />
+    <fieldset>
+      <legend>Select Hotkey For Spam!<span>*</span></legend>
+      <select id="hotkey">
+        <option value="none">Select A Hotkey</option>
+        <option value="ctrl">CTRL</option>
+        <option value="shift">SHIFT (Recommended)</option>
+      </select>
+    </fieldset>
+    <br />
+    <button id="start" onclick="spam()">Start</button>
+    <p class="prompt" id="prompt">
+      Developed By <a href="https://lovelak.rf.gd" target="_blank">Lovelak</a>
+    </p>
+    <script>
+      const Message = document.getElementById("message");
+      const Where = document.getElementById("where");
+      const Hotkey = document.getElementById("hotkey");
+      const Start = document.getElementById("start");
+      const Prompt = document.getElementById("prompt");
+
+      function spam() {
+        if (
+          Message.value === "" ||
+          Where.value === "none" ||
+          Hotkey.value === "none"
+        ) {
+          Prompt.innerHTML = "Please Fill All The Fields...";
+          setTimeout(() => {
+            Prompt.innerHTML =
+              'Developed By <a href="https://lovelak.rf.gd" target="_blank">Lovelak</a>';
+          }, 2000);
+        } else if (Start.innerHTML === "Start") {
+          window.pywebview.api.start(Message.value, Where.value, Hotkey.value);
+          Start.innerHTML = "Stop";
+          Prompt.innerHTML =
+            "Spam Bot Started<br>Just Hold " +
+            "(" +
+            Hotkey.value +
+            ")" +
+            " In-game Console";
+          setTimeout(() => {
+            Prompt.innerHTML =
+              'Developed By <a href="https://lovelak.rf.gd" target="_blank">Lovelak</a>';
+          }, 2000);
+        } else if (Start.innerHTML === "Stop") {
+          window.pywebview.api.stop();
+          Start.innerHTML = "Start";
+          Prompt.innerHTML = "Spam Bot Stopped";
+          setTimeout(() => {
+            Prompt.innerHTML =
+              'Developed By <a href="https://lovelak.rf.gd" target="_blank">Lovelak</a>';
+          }, 2000);
+        }
+      }
+    </script>
+  </body>
+</html>
